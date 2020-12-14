@@ -13,6 +13,13 @@ flags: compiler
 setenv: CAML_LD_LIBRARY_PATH = "%{lib}%/stublibs"
 build: [
   [
+    "sed"
+    "-ib"
+    "-e"
+    "s/opts=\"\"/opts=\"-Wno-implicit-function-declaration\"/"
+    "config/auto-aux/hasgot"
+  ] {os = "macos"}
+  [
     "./configure"
     "-cc"
     "cc -fPIC"
@@ -32,3 +39,4 @@ url {
 }
 patches: ["fix-gcc10.patch"]
 extra-files: [ ["fix-gcc10.patch" "md5=4516183897da9033f49dd291fa198b8c"] ]
+available: !(os = "macos" & arch = "arm64")

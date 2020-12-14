@@ -19,8 +19,8 @@ build: [
     "./configure"
     "--prefix=%{prefix}%"
     "-C"
-    "CC=cc" {os = "openbsd" | os = "freebsd" | os = "macos"}
-    "ASPP=cc -c" {os = "openbsd" | os = "freebsd" | os = "macos"}
+    "CC=cc" {os = "openbsd" | os = "macos"}
+    "ASPP=cc -c" {os = "openbsd" | os = "macos"}
   ]
   [make "-j%{jobs}%" {os != "cygwin"} "world"]
   [make "-j%{jobs}%" {os != "cygwin"} "world.opt"]
@@ -40,3 +40,4 @@ post-messages: [
    to force a sequential build instead."
   {failure & jobs > 1 & os != "cygwin" & opam-version >= "2.0.5"}
 ]
+available: !(os = "macos" & arch = "arm64")
