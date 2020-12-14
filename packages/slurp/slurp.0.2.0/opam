@@ -1,0 +1,43 @@
+opam-version: "2.0"
+synopsis: "Sinatra Like URL Route Processing"
+maintainer: "Julien Blond <julien.blond@gmail.com>"
+authors: "Julien Blond <julien.blond@gmail.com>"
+license: "Apache 2.0"
+tags: ["sinatra" "route" "http" "server"]
+homepage: "https://github.com/Ninjapouet/slurp"
+bug-reports: "https://github.com/Ninjapouet/slurp/issues"
+depends: [
+  "dune" {>= "2.7"}
+  "ocaml" {>= "4.08.1"}
+  "fmt" {>= "0.8.8"}
+  "ezjsonm" {>= "1.1.0"}
+  "uri" {>= "3.1.0"}
+  "lwt" {>= "5.2.0"}
+  "lwt_ppx" {>= "2.0.1"}
+  "magic-mime" {>= "1.1.2"}
+  "fpath" {>= "0.7.3"}
+  "lwt_react" {>= "1.1.3"}
+  "odoc" {with-doc}
+]
+build: [
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@lib/runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/Ninjapouet/slurp.git"
+url {
+  src: "https://github.com/Ninjapouet/slurp/archive/0.2.0-alpha.tar.gz"
+  checksum: [
+    "md5=55b0ca5c4dc138d8c7d7e14bd2c2f489"
+    "sha512=36bf1c28a8b9dbf1e0140a9982f2a9fd176677915958be8e86e5300a231bed811d0a5bc4ede3032865d41d488bcad7c174fbe191852d1a5d5c6e672a994e82c7"
+  ]
+}
