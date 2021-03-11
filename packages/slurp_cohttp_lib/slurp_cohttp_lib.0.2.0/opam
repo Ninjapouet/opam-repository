@@ -1,0 +1,53 @@
+opam-version: "2.0"
+license: "LGPL-2.1-only with OCaml-LGPL-linking-exception"
+synopsis: "The slurp project"
+description: """
+
+
+
+This is the description
+of the slurp OCaml project
+"""
+authors: ["Julien BLOND <julien.blond@bertin.fr>"]
+maintainer: ["Julien BLOND <julien.blond@bertin.fr>"]
+homepage: "https://Ninjapouet.github.io/slurp"
+doc: "https://Ninjapouet.github.io/slurp/sphinx"
+bug-reports: "https://github.com/Ninjapouet/slurp/issues"
+dev-repo: "git+https://github.com/Ninjapouet/slurp.git"
+tags: "org:Ninjapouet"
+build: [
+  ["dune" "subst"] {dev}
+  ["sh" "-c" "./scripts/before.sh build '%{name}%'"]
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+  ["sh" "-c" "./scripts/after.sh build '%{name}%'"]
+]
+install: [
+  ["sh" "-c" "./scripts/before.sh install '%{name}%'"]
+]
+depends: [
+  "ocaml" {>= "4.07.0"}
+  "dune" {>= "2.6.0"}
+  "slurp" {= version}
+  "cohttp-lwt-unix" {}
+  "clim" {}
+  "ppx_inline_test" {with-test}
+  "ppx_expect" {with-test}
+  "odoc" {with-doc}
+  "ocamlformat" {with-test}
+  "lwt_ppx" {}
+]
+
+url {
+    src: "https://github.com/Ninjapouet/slurp/archive/v0.2.0.tar.gz"
+    checksum: [ "sha256=48e876f73c345294cb230fe5fdc76e6e73b8d59b4019424b4ce4a9fab70aee92" ]
+}
